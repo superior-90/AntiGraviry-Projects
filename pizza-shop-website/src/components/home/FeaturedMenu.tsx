@@ -1,3 +1,4 @@
+"use client"
 import { Section } from "@/components/ui/Section";
 import { ProductCard } from "@/components/ui/ProductCard";
 
