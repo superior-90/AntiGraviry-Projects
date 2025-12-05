@@ -1,5 +1,6 @@
+
 import Image from "next/image";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/Button"; // Ensure Button component also has "use client" if it uses client-side interactivity
 import { Plus } from "lucide-react";
 
 interface ProductCardProps {
@@ -11,6 +12,12 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ name, description, price, image, tag }: ProductCardProps) {
+
+    const handleAddToOrder = () => {
+        alert(`"${name}" added to order`);
+        // In a real application, you would dispatch an action to a cart/order context or store here.
+    };
+
     return (
         <div className="group relative bg-card rounded-xl overflow-hidden border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 flex flex-col h-full">
             {tag && (
@@ -31,13 +38,15 @@ export function ProductCard({ name, description, price, image, tag }: ProductCar
             <div className="p-6 flex flex-col flex-grow">
                 <div className="flex justify-between items-start mb-2">
                     <h3 className="text-xl font-bold font-serif text-foreground group-hover:text-primary transition-colors">{name}</h3>
-                    <span className="text-lg font-bold text-secondary">${price}</span>
+                    <span className="text-lg font-bold text-secondary">${price.toFixed(2)}</span>
                 </div>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-6 line-clamp-2 flex-grow">
                     {description}
                 </p>
 
-                <Button className="w-full gap-2 group/btn" variant="secondary">
+                <Button className="w-full gap-2 group/btn" variant="secondary"
+                    onClick={handleAddToOrder}
+                >
                     Add to Order <Plus className="h-4 w-4 transition-transform group-hover/btn:rotate-90" />
                 </Button>
             </div>
